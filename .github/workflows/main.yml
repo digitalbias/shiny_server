@@ -17,4 +17,4 @@ jobs:
           host: ${{ secrets.shiny_server }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.SSH_KEY }}
+          
