@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Copy folder content recursively to remote
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: "*"
-          remote: "/srv/shiny-server/"
-          host: ${{ secrets.shiny_server }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "*"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
