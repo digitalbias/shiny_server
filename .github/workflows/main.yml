@@ -1,19 +1,20 @@
-name: scp files
-on: [push]
-jobs:
+name: scp copy folder to remote via SSH
+on:
+  push:
+    branches:
+      - master
 
+jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@master
-    - name: copy files via ssh password
-      uses: appleboy/scp-action@master
-      env:
-        HOST: ${{ secrets.shiny_server }}
-        USERNAME: ${{ secrets.SSH_USERNAME }}
-        PORT: ${{ secrets.shiny_port }}
-        KEY: ${{ secrets.SSH_KEY }}
-      with:
-        source: "*"
-        target: "/srv/shiny-server/"
+      - name: Copy folder content recursively to remote
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: "*"
+          remote: "/srv/shiny-server/"
+          host: ${{ secrets.shiny_server }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          privateKey: ${{ secrets.SSH_KEY }}
