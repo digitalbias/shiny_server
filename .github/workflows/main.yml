@@ -1,20 +1,15 @@
-name: scp copy folder to remote via SSH
-on:
-  push:
-    branches:
-      - master
-
+name: remote ssh command
+on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Staging server
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          ARGS: "-rltgoDzvO"
-          SOURCE: "*"
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USERNAME }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        script: whoami
