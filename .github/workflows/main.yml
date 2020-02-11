@@ -13,6 +13,6 @@ jobs:
         host: ${{ secrets.shiny_server }}
         port: ${{ secrets.shiny_port }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
+        password: ${{ secrets.SSH_PASSWORD }}
         source: "*"
         target: "/srv/shiny-server/"
