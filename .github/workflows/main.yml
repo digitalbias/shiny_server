@@ -16,5 +16,5 @@ jobs:
           remote: "/srv/shiny-server/"
           host: ${{ secrets.shiny_server }}
           username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.SSH_PASSWORD }}
           
