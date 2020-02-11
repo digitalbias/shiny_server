@@ -9,10 +9,11 @@ jobs:
     - uses: actions/checkout@master
     - name: copy files via ssh password
       uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.shiny_server }}
+        USERNAME: ${{ secrets.SSH_USERNAME }}
+        PORT: ${{ secrets.shiny_port }}
+        KEY: ${{ secrets.SSH_KEY }}
       with:
-        host: ${{ secrets.shiny_server }}
-        port: ${{ secrets.shiny_port }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
         source: "*"
         target: "/srv/shiny-server/"
